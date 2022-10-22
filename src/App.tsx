@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await axios.get('http://localhost:3001/api/categories');
+
+      console.log(data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
