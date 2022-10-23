@@ -7,7 +7,7 @@ export const getBooks = async ({
   page,
   size,
 }: {
-  categoryId: number;
+  categoryId: string;
   page?: number;
   size?: number;
 }): Promise<Book[]> => {

@@ -10,10 +10,11 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 import Layout from 'components/Layout';
 
+import reportWebVitals from './reportWebVitals';
+
 const Bookmarks = loadable(() => import('pages/bookmarks'));
 const Home = loadable(() => import('pages/home'));
-
-import reportWebVitals from './reportWebVitals';
+const CategoryDetail = loadable(() => import('pages/category/detail'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,6 +40,7 @@ root.render(
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="bookmarks" element={<Bookmarks />} />
+            <Route path="category/:categoryId" element={<CategoryDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
