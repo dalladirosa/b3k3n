@@ -41,7 +41,7 @@
         "groups": [
           ["^react"],
 
-          ["@tanstack"],
+          ["@tanstack", "@loadable"],
 
           // ext library & side effect imports
           ["^@?\\w", "^\\u0000"],
