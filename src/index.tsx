@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import './index.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import Bookmarks from 'pages/bookmarks';
 import Home from 'pages/home';
@@ -12,7 +13,17 @@ import Layout from 'components/Layout';
 
 import reportWebVitals from './reportWebVitals';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchInterval: false,
+      refetchIntervalInBackground: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      retry: 0,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
