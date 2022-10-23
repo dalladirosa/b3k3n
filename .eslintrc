@@ -3,15 +3,24 @@
   "extends": [
     "prettier",
     "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:tailwindcss/recommended"
   ],
   "plugins": [
+    "react",
+    "@typescript-eslint",
     "prettier",
     "simple-import-sort",
     "unused-imports",
     "tailwindcss"
   ],
+  "parserOptions": {
+    "requireConfigFile": false
+  },
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "warn",
@@ -30,6 +39,10 @@
       "warn",
       {
         "groups": [
+          ["^react"],
+
+          ["@tanstack"],
+
           // ext library & side effect imports
           ["^@?\\w", "^\\u0000"],
           // {s}css files
@@ -39,7 +52,7 @@
           // static data
           ["^@/data"],
           // components
-          ["^@/components", "^@/container"],
+          ["^pages", "^components", "^containers", "^interfaces"],
           // Other imports
           ["^@/"],
           // relative paths up until 3 level
@@ -69,6 +82,7 @@
     "tailwindcss/no-contradicting-classname": "error",
 
     "no-unused-vars": "warn",
-    "semi": "off"
+    "semi": "off",
+    "no-undef": "off"
   }
 }

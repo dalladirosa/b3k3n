@@ -1,14 +1,14 @@
-import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-import fetch from 'node-fetch';
 import cors from 'cors';
+import express, { Application } from 'express';
+import fetch from 'node-fetch';
 
 const app: Application = express();
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/categories', async (req, res) => {
-  const { categoryId, page = 0, size } = req.query;
   const respond = await fetch(
     'https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories'
   );
@@ -17,10 +17,13 @@ app.get('/api/categories', async (req, res) => {
 });
 
 app.get('/api/books', async (req, res) => {
+  const { categoryId, page = 0, size } = req.query;
+
   const respond = await fetch(
-    'https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-books'
+    `https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-books?categoryId=${categoryId}&page=${page}&size=${size}`
   );
   const data = await respond.json();
+
   res.send(JSON.stringify(data));
 });
 
