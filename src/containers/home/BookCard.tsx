@@ -41,10 +41,13 @@ const BookCard = forwardRef<Ref, BookCardProps>(
 
     const handleAddBookmark = (bookmarked: string | null) => {
       if (bookmarked) {
-        const newData = [...JSON.parse(bookmarked), book];
+        const newData = [
+          ...JSON.parse(bookmarked),
+          { ...book, category: selectedCategory },
+        ];
         localStorage.setItem('bookmarks', JSON.stringify(newData));
       } else {
-        const newData = [{ ...book }];
+        const newData = [{ ...book, category: selectedCategory }];
         localStorage.setItem('bookmarks', JSON.stringify(newData));
       }
 
