@@ -1,16 +1,15 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 import Navbar from './Navbar';
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="container mx-auto">{children}</main>
+      <main className="container mx-auto">
+        <Outlet />
+      </main>
     </div>
   );
 };

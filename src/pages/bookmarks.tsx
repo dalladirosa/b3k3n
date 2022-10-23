@@ -1,7 +1,8 @@
 import React from 'react';
 
 const BookmarksPage = () => {
-  return <div>Bookmarks</div>;
+  console.log('tets');
+  return <div>Bookmarks dadad</div>;
 };
 
 export default BookmarksPage;

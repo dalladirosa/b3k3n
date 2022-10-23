@@ -1,11 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -17,28 +12,6 @@ import Layout from 'components/Layout';
 
 import reportWebVitals from './reportWebVitals';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route
-      path="/"
-      element={
-        <Layout>
-          <Home />
-        </Layout>
-      }
-    >
-      <Route
-        path="bookmarks"
-        element={
-          <Layout>
-            <Bookmarks />
-          </Layout>
-        }
-      />
-    </Route>
-  )
-);
-
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
@@ -48,7 +21,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="bookmarks" element={<Bookmarks />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>
 );

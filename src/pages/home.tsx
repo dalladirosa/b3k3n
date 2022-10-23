@@ -6,6 +6,8 @@ import { getBooks } from 'api/books';
 import { getCategories } from 'api/categories';
 
 import BookCard from 'containers/home/BookCard';
+import { Book } from 'interfaces/books.interface';
+import { Category } from 'interfaces/categories.interface';
 
 const COLORS = [
   'bg-amber-200',
@@ -16,18 +18,18 @@ const COLORS = [
 ];
 
 function HomePage() {
-  const [selectedCategory, setSelectedCategory] = useState(-1);
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
 
   const { data: categories } = useQuery(['categories'], getCategories);
 
   const { data: books } = useQuery(
-    ['categoryBooks', selectedCategory],
-    ({ queryKey }) => getBooks({ categoryId: queryKey[1] as number, size: 7 }),
-    { enabled: selectedCategory !== -1 }
+    ['categoryBooks', selectedCategory?.id],
+    ({ queryKey }) => getBooks({ categoryId: queryKey[1] as number, size: 8 }),
+    { enabled: !!selectedCategory?.id }
   );
 
-  const handleSelectCategory = (categoryName: number) => () => {
-    setSelectedCategory(categoryName);
+  const handleSelectCategory = (category: Category) => () => {
+    setSelectedCategory(category);
   };
 
   return (
@@ -37,7 +39,7 @@ function HomePage() {
           <div
             key={category.id}
             className={`${COLORS[index]} p-4 rounded-lg text-[#333] text-sm w-full cursor-pointer h-[100px]`}
-            onClick={handleSelectCategory(category.id)}
+            onClick={handleSelectCategory(category)}
           >
             {category.name}
           </div>
@@ -45,8 +47,12 @@ function HomePage() {
       </div>
 
       <div className="mt-12 grid gap-6 grid-cols-4">
-        {books?.map((book, index) => (
-          <BookCard key={`${book.id}-${index}`} />
+        {books?.map((book: Book, index: number) => (
+          <BookCard
+            book={book}
+            selectedCategory={selectedCategory}
+            key={`${book.id}-${index}`}
+          />
         ))}
       </div>
     </main>
