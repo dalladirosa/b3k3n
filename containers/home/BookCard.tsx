@@ -64,14 +64,14 @@ const BookCard = forwardRef<Ref, BookCardProps>(
     };
 
     return (
-      <div className="cursor-pointer" ref={ref}>
+      <div className="flex flex-col flex-1 cursor-pointer" ref={ref}>
         <img src={book.cover_url} alt="" />
-        <div className="flex flex-row items-center">
-          <div className="mr-auto">
-            <h1 className="font-semibold text-[#333] mt-2">{book.title}</h1>
-            <p className="text-xs text-[#333]">{selectedCategory}</p>
+        <div className="flex flex-row items-stretch flex-1 mt-2">
+          <div className="flex flex-col flex-1 mr-auto">
+            <h1 className="font-semibold text-[#333]">{book.title}</h1>
+            <p className="text-xs text-[#333] mt-auto">{selectedCategory}</p>
           </div>
-          <button onClick={handleBookmark}>
+          <button onClick={handleBookmark} className="self-baseline mt-2">
             {isBookmarked ? <RiBookmarkFill /> : <RiBookmarkLine />}
           </button>
         </div>

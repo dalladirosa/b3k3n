@@ -33,7 +33,7 @@ const BookmarksPage = () => {
           No bookmarked books....
         </div>
       ) : (
-        <div className="mt-12 grid gap-6 grid-cols-4">
+        <div className="mt-12 grid gap-6 xs:grid-cols-2 lg:grid-cols-4">
           {bookmarks.map((book: Book & { category: string }, index) => (
             <BookCard
               book={book}

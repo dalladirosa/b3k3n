@@ -7,7 +7,11 @@ module.exports = {
     './layouts/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '375px',
+      },
+    },
     container: {
       padding: {
         DEFAULT: '1rem',

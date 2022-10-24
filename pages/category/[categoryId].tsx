@@ -77,7 +77,7 @@ const CategoryDetailPage = () => {
       <label className="block relative mt-6">
         <MdSearch className="absolute top-2/4 left-[10px] -translate-y-2/4 text-slate-400" />
         <input
-          className="border border-slate-200 placeholder:text-slate-400 rounded-md py-1 px-8"
+          className="border border-slate-200 placeholder:text-slate-400 rounded-md py-1 px-8 xs:w-full lg:w-auto"
           placeholder="Search book"
           onChange={handleChangeSearch}
         />
@@ -88,12 +88,15 @@ const CategoryDetailPage = () => {
           Try search another book...
         </div>
       ) : (
-        <div className="mt-12 grid gap-6 grid-cols-4">
+        <div className="mt-12 grid gap-6 xs:grid-cols-2 lg:grid-cols-4">
           {isFetching && !isFetchingNextPage
             ? times(8, (index) => (
-                <div key={index}>
-                  <Skeleton height={417} />
-                  <Skeleton height={16} width={180} />
+                <div
+                  key={index}
+                  className="flex flex-col flex-1 w-full xs:h-[311px]"
+                >
+                  <Skeleton className="2xl:h-[501px] h-full flex-1 xs:h-[239px] sm:h-[438px] md:h-[534px] lg:h-[417px] w-full" />
+                  <Skeleton height={16} className="xs:w-[80px]" />
                   <Skeleton height={16} width={60} />
                 </div>
               ))

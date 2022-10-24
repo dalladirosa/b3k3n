@@ -33,7 +33,7 @@ function HomePage() {
             <a
               className={`${
                 COLORS[index]
-              } p-4 rounded-lg text-[#333] text-base font-semibold w-full cursor-pointer h-[100px] hover:outline outline-offset-2 outline-2 outline-violet-500
+              } p-4 rounded-lg text-[#333] xs:text-sm lg:text-base font-semibold w-full cursor-pointer h-[100px] hover:outline outline-offset-2 outline-2 outline-violet-500
            ${index === categories.length - 1 ? 'col-span-2' : ''}`}
             >
               {category.name}
