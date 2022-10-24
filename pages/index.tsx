@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -24,16 +24,20 @@ function HomePage() {
       <div className="grid gap-4 grid-cols-2">
         {categories?.map((category, index) => (
           <Link
-            to={`/category/${category.id}?name=${encodeURIComponent(
+            href={`/category/${category.id}?name=${encodeURIComponent(
               category.name
             )}`}
             key={category.id}
-            className={`${
-              COLORS[index]
-            } p-4 rounded-lg text-[#333] text-base font-semibold w-full cursor-pointer h-[100px] hover:outline outline-offset-2 outline-2 outline-violet-500
-           ${index === categories.length - 1 ? 'col-span-2' : ''}`}
+            passHref
           >
-            {category.name}
+            <a
+              className={`${
+                COLORS[index]
+              } p-4 rounded-lg text-[#333] text-base font-semibold w-full cursor-pointer h-[100px] hover:outline outline-offset-2 outline-2 outline-violet-500
+           ${index === categories.length - 1 ? 'col-span-2' : ''}`}
+            >
+              {category.name}
+            </a>
           </Link>
         ))}
       </div>

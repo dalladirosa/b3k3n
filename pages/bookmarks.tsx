@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { VscChevronLeft } from 'react-icons/vsc';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import BookCard from 'containers/home/BookCard';
 import { Book } from 'interfaces/books.interface';
@@ -19,9 +19,11 @@ const BookmarksPage = () => {
   return (
     <>
       <div>
-        <Link to="/" className="flex flex-row items-center text-gray-500">
-          <VscChevronLeft className="mr-3" />
-          <span>Back to categories</span>
+        <Link href="/" passHref>
+          <a className="flex flex-row items-center text-gray-500">
+            <VscChevronLeft className="mr-3" />
+            <span>Back to categories</span>
+          </a>
         </Link>
         <h1 className="mt-6 font-semibold text-2xl">Bookmarked book</h1>
       </div>

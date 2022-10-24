@@ -11,7 +11,7 @@ export const getBooks = async ({
   page?: number;
   size?: number;
 }): Promise<Book[]> => {
-  const { data } = await axios.get('http://localhost:3001/api/books', {
+  const { data } = await axios.get('/api/books', {
     params: { categoryId, page, size },
   });
 

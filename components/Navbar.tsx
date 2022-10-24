@@ -1,12 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const LINKS = [
   { href: '/', text: 'Books' },
-  { href: 'bookmarks', text: 'Bookmarks' },
+  { href: '/bookmarks', text: 'Bookmarks' },
 ];
 
 const Navbar = () => {
+  const router = useRouter();
+
   return (
     <nav className="py-6 shadow">
       <ul className="flex flex-row items-center container mx-auto">
@@ -15,13 +18,15 @@ const Navbar = () => {
             className={index === 0 ? 'mr-6' : ''}
             key={`${index}-${link.href}`}
           >
-            <NavLink
-              to={link.href}
-              style={({ isActive }) => (isActive ? activeStyle : inActiveStyle)}
-              end
-            >
-              {link.text}
-            </NavLink>
+            <Link href={link.href} passHref>
+              <a
+                style={
+                  router.pathname === link.href ? activeStyle : inActiveStyle
+                }
+              >
+                {link.text}
+              </a>
+            </Link>
           </li>
         ))}
       </ul>

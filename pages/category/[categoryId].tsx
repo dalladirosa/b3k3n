@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { MdSearch } from 'react-icons/md';
 import { VscChevronLeft } from 'react-icons/vsc';
 import { useInView } from 'react-intersection-observer';
 import Skeleton from 'react-loading-skeleton';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -14,16 +16,15 @@ import BookCard from 'containers/home/BookCard';
 import { Book } from 'interfaces/books.interface';
 
 const CategoryDetailPage = () => {
-  const location = useLocation();
-  const { categoryId } = useParams();
+  const router = useRouter();
 
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState('');
-  const [category] = useState(getParameterByName('name'));
+  const [category, setCategory] = useState('');
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
     useInfiniteQuery(
-      ['categoryBooks', categoryId],
+      ['categoryBooks', router.query.categoryId],
       ({ pageParam, queryKey }) =>
         getBooks({
           categoryId: queryKey[1] as string,
@@ -31,7 +32,7 @@ const CategoryDetailPage = () => {
           page: pageParam?.page ?? 0,
         }),
       {
-        enabled: !!categoryId,
+        enabled: !!router.query.categoryId,
         refetchOnMount: true,
         getNextPageParam: (lastPage) => {
           return lastPage.length === 16 ? { page } : undefined;
@@ -44,16 +45,15 @@ const CategoryDetailPage = () => {
 
   const { ref, inView } = useInView();
 
-  React.useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage && !isFetching) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage]);
+  }, [inView, hasNextPage, isFetchingNextPage, isFetching, fetchNextPage]);
 
-  function getParameterByName(name: string) {
-    const match = RegExp('[?&]' + name + '=([^&]*)').exec(location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-  }
+  useEffect(() => {
+    setCategory(router.query.name as string);
+  }, [router.query.name]);
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -66,9 +66,11 @@ const CategoryDetailPage = () => {
   return (
     <>
       <div>
-        <Link to="/" className="flex flex-row items-center text-gray-500">
-          <VscChevronLeft className="mr-3" />
-          <span>Back to categories</span>
+        <Link href="/" passHref>
+          <a className="flex flex-row items-center text-gray-500">
+            <VscChevronLeft className="mr-3" />
+            <span>Back to categories</span>
+          </a>
         </Link>
         <h1 className="mt-6 font-semibold text-2xl">{category}</h1>
       </div>
@@ -95,16 +97,13 @@ const CategoryDetailPage = () => {
                   <Skeleton height={16} width={60} />
                 </div>
               ))
-            : filteredData?.map((book: Book, index: number) => {
-                return (
-                  <BookCard
-                    ref={flatten(data?.pages).length === index + 1 ? ref : null}
-                    book={book}
-                    selectedCategory={category}
-                    key={`${book.id}-${index}`}
-                  />
-                );
-              })}
+            : filteredData?.map((book: Book, index: number) => (
+                <BookCard
+                  book={book}
+                  selectedCategory={category}
+                  key={`${book.id}-${index}`}
+                />
+              ))}
           {isFetchingNextPage &&
             times(8, (index) => (
               <div key={index}>
@@ -113,6 +112,7 @@ const CategoryDetailPage = () => {
                 <Skeleton height={16} width={60} />
               </div>
             ))}
+          <div ref={ref} />
         </div>
       )}
     </>
