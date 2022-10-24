@@ -1,46 +1,110 @@
-# Getting Started with Create React App
+# b3k3n Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [Getting Started](#getting-started)
+- [Folder Structure](#structure-and-naming)
+- [Pages](#pages)
 
-## Available Scripts
+## Getting started
 
-In the project directory, you can run:
+<a name="getting-started"></a>
+To setup this repo locally, run following commands
 
-### `npm start`
+### Clone repo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To setup this repo locally, run following commands
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```sh
+# Clone repo
+$ git clone git@github.com:dalladirosa/b3k3n.git
+$ cd b3k3n
 
-### `npm test`
+# Install dependencies
+# This will automatically run install all package
+# dependencies and link all packages together
+$ npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Editor Integration
 
-### `npm run build`
+- [VSCode](https://code.visualstudio.com/) (**recommended**)
+- [Webstrom](https://www.jetbrains.com/webstorm/) (**recommended**)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Editor Plugins
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- eslint
+- prettier
+- tailwindcss
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<a name="structure-and-naming"></a>
 
-### `npm run eject`
+## 2. Structure and Naming
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- While the boilerplate does primarily rely on the standard file structure of a Next.js project (anchored around the /pages directory), a few additions have been made. The following outlines the full structure of the boilerplate:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  ```
+  .
+  ├── public
+  ├── api
+  │   ├── books.ts
+  │   └── category.ts
+  ├── /components
+  │   └── Layout.tsx
+  │   └── Navbar.tsx
+  ├── /containers
+  │   └── /home
+  │       └── BookCard.tsx
+  ├── /interfaces
+  │   ├── books.interface.ts
+  │   └── categories.interface.ts
+  ├── pages
+  │   ├── /api
+  │   │   │
+  │   │   └── books.tsx
+  │   ├── /documents
+  │   │   ├── [id]
+  │   │   │   └── index.tsx
+  │   │   └── index.tsx
+  │   └── profile.tsx
+  ├── styles
+  │   ├── global.css
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* `public`: Folder used for static files, see [Static File Serving](https://nextjs.org/docs/basic-features/static-file-serving).
+* `api`: The api directory contains all services that take care of the communication between the React application (frontend) and an API (backend).
+* `components`: The components directory contains reusable elements, modules, templates, and layouts.
+* `containers`: The containers directory contains components that are used by pages.
+  - always create a folder that uses the same name with the page
+  - use `lower_snake_case` for the root folder
+  - for the child folder use `CamelCase`
+* `interfaces`: The hooks directory contains interfaces that are used by many pages.
+* `pages`: Folder used for routing, see [Pages](https://nextjs.org/docs/basic-features/pages)
+* `styles`: The styles directory contains styles that are used globally.
 
-## Learn More
+<a name="pages"></a>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 3. Pages
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+In this project there are 3 pages
+
+- [Home Page](#home-page)
+- [Bookmarks Page](#bookmark-page)
+- [Category Book Page](#category-page)
+
+<a name="home-page"></a>
+
+### Home Page
+
+![alt text](/public/home_page.png)
+
+<a name="bookmark-page"></a>
+
+### Bookmarks Page
+
+![alt text](/public/bookmark_page.png)
+
+<a name="category-page"></a>
+
+### Category Book Page
+
+![alt text](/public/category_page.png)
