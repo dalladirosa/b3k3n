@@ -3,6 +3,7 @@
 - [Getting Started](#getting-started)
 - [Folder Structure](#structure-and-naming)
 - [Pages](#pages)
+- [API Feedback](#api-feedback)
 
 ## Getting started
 
@@ -108,3 +109,9 @@ In this project there are 3 pages
 ### Category Book Page
 
 ![alt text](/public/category_page.png)
+
+<a name="api-feedback"></a>
+
+### API Feedback
+
+My feedback is i think is better to add `totalPage` or `totalCount` properties in book API. If the API provide `totalPage` or `totalCount` the frontend side will not have much trouble to implement infinite scroll or pagination
